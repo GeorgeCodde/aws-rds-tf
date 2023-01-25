@@ -13,8 +13,9 @@ output "user_db" {
   value       = aws_db_instance.dbrdstest.username
 }
 
-/*output "password_db" {
+output "password_db" {
   description = "Password of the database"
   value       = random_password.password.result
-}*/
+  sensitive = true
+}
 

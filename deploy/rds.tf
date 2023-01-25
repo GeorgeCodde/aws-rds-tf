@@ -1,16 +1,11 @@
 
-resource "random_string" "db-password" {
-  length  = 32
-  upper   = true
-  numeric  = true
-  special = false
-}
 
-/*resource "random_password" "password" {
+
+resource "random_password" "password" {
   length           = 16
   special          = true
   override_special = "!#$%&*()-_=+[]{}<>:?"
-}*/
+}
 
 resource "aws_security_group" "sg-rds" {
   vpc_id      = aws_vpc.vpc_rds_test.id
@@ -44,6 +39,6 @@ resource "aws_db_instance" "dbrdstest" {
   publicly_accessible    = var.db_instance_publicly_accessible
   vpc_security_group_ids = [aws_security_group.sg-rds.id]
   username               = var.db_username
-  password               = "random_password.password.result"
+  password               = random_password.password.result
   db_subnet_group_name   = aws_db_subnet_group.sub_g_rds_test.name
 }

@@ -39,3 +39,7 @@ tf-destroy: ##  --terraform destroy--
 tf-stl: ##  --terraform state list--
 	docker-compose -f deploy/docker-compose.yml run --rm terraform state list
 
+.PHONY: tf-pass
+tf-pass: ##  --terraform show password--
+	docker-compose -f deploy/docker-compose.yml run --rm terraform output -raw password_db
+
